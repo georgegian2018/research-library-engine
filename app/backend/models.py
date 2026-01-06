@@ -7,25 +7,6 @@ from sqlmodel import SQLModel, Field
 
 
 # -------------------------------------------------------------------
-# Link tables (many-to-many) — must be defined FIRST
-# -------------------------------------------------------------------
-
-class PaperAuthor(SQLModel, table=True):
-    paper_id: str = Field(foreign_key="paper.id", primary_key=True)
-    author_id: int = Field(foreign_key="author.id", primary_key=True)
-
-
-class PaperTag(SQLModel, table=True):
-    paper_id: str = Field(foreign_key="paper.id", primary_key=True)
-    tag_id: int = Field(foreign_key="tag.id", primary_key=True)
-
-
-class PaperProject(SQLModel, table=True):
-    paper_id: str = Field(foreign_key="paper.id", primary_key=True)
-    project_id: int = Field(foreign_key="project.id", primary_key=True)
-
-
-# -------------------------------------------------------------------
 # Core entities
 # -------------------------------------------------------------------
 
