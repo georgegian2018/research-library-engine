@@ -1,6 +1,12 @@
+from app.backend.projects import (
+    create_project,
+    list_projects,
+    add_paper_to_project,
+    list_papers_in_project,
+)
+
+
 from app.backend.export.bibtex import export_bibtex
-
-
 
 from app.backend.tags_notes import (
     add_tag_to_paper,
@@ -101,4 +107,26 @@ def api_get_note(paper_id: str):
 @app.get("/export/bibtex")
 def api_export_bibtex():
     return {"bibtex": export_bibtex()}
+
+
+
+@app.post("/projects")
+def api_create_project(name: str, description: str = ""):
+    return create_project(name, description)
+
+
+@app.get("/projects")
+def api_list_projects():
+    return list_projects()
+
+
+@app.post("/projects/{project_id}/papers/{paper_id}")
+def api_add_paper_to_project(project_id: int, paper_id: str):
+    add_paper_to_project(project_id, paper_id)
+    return {"status": "ok"}
+
+
+@app.get("/projects/{project_id}/papers")
+def api_list_papers_in_project(project_id: int):
+    return list_papers_in_project(project_id)
 
