@@ -1,15 +1,20 @@
 from __future__ import annotations
+
 import re
 
 
 def normalize_title(title: str) -> str:
     """
-    Normalize a paper title for comparison.
+    Normalize a paper title for similarity comparisons.
+
+    - lowercases
+    - removes punctuation/symbols
+    - collapses whitespace
     """
     if not title:
         return ""
 
-    title = title.lower()
-    title = re.sub(r"[^\w\s]", "", title)
-    title = re.sub(r"\s+", " ", title).strip()
-    return title
+    t = title.lower()
+    t = re.sub(r"[^\w\s]", " ", t)     # replace punctuation with spaces
+    t = re.sub(r"\s+", " ", t).strip() # collapse whitespace
+    return t
