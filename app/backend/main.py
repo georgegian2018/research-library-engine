@@ -1,3 +1,8 @@
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
+
+
+
 from app.backend.dedup import find_possible_duplicates
 
 @app.get("/dedup/report")
@@ -38,6 +43,15 @@ from app.backend.search import fts_search, list_papers
 
 
 app = FastAPI(title="Research Library Engine", version="0.1.0")
+
+
+
+# Serve the UI at /ui
+frontend_dir = Path("app") / "frontend"
+if frontend_dir.exists():
+    app.mount("/ui", StaticFiles(directory=str(frontend_dir), html=True), name="ui")
+
+
 
 app.add_middleware(
     CORSMiddleware,
