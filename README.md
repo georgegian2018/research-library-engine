@@ -87,9 +87,13 @@ rle search "MIMO phased array"
 ```bash
 rle serve
 ```
-# Then open:
+## Then open:
 - API Docs: http://127.0.0.1:8000/docs
 - Health check: http://127.0.0.1:8000/health
+
+---
+
+## Repository Structure
 
 ```text
 research-library-engine/
