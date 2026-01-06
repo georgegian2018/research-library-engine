@@ -1,4 +1,6 @@
-print(">>> LOADING models.py (Paper-only version)")
+raise RuntimeError(">>> THIS IS THE MODELS.PY BEING IMPORTED")
+
+
 
 from datetime import datetime
 from typing import Optional
