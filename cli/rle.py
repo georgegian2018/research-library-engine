@@ -1,3 +1,24 @@
+from app.backend.dedup import find_possible_duplicates
+
+@app.command()
+def dedup_report(threshold: float = 0.85):
+    """
+    Show possible duplicate papers based on title + author similarity.
+    """
+    results = find_possible_duplicates(threshold)
+    if not results:
+        print("[green]No possible duplicates found.[/green]")
+        return
+
+    for r in results:
+        print(
+            f"[yellow]{r['score']}[/yellow] "
+            f"{r['paper_1_title']}  <->  {r['paper_2_title']}"
+        )
+
+
+
+
 from app.backend.projects import (
     create_project,
     list_projects,
