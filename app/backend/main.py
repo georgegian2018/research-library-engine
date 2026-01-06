@@ -1,3 +1,7 @@
+from app.backend.export.bibtex import export_bibtex
+
+
+
 from app.backend.tags_notes import (
     add_tag_to_paper,
     list_tags_for_paper,
@@ -91,4 +95,10 @@ def api_set_note(paper_id: str, content_md: str):
 @app.get("/papers/{paper_id}/note")
 def api_get_note(paper_id: str):
     return {"content_md": get_note_for_paper(paper_id)}
+
+
+
+@app.get("/export/bibtex")
+def api_export_bibtex():
+    return {"bibtex": export_bibtex()}
 
