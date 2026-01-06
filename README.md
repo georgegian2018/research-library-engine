@@ -151,16 +151,9 @@ See [`/links`](./links) for:
 
 | Repository | Description |
 |------------|-------------|
- [`engineering-research-wiki`](https://github.com/georgiosgiannakopoulos/engineering-research-wiki)  Technical deep-dives into RF, signal processing, and many more... 
- [`technical-wiki-hub`](https://github.com/georgiosgiannakopoulos/technical-wiki-hub)  Technical deep-dives into wiki-page-template, linux-and-tools, networking-basics and many more...
- [`research library engine`](https://github.com/georgiosgiannakopoulos/research-library-engine)  Technical deep-dives into Research tools and academic repositories, with exporting BibTeX / RIS / IEEE / Markdown / CSV 
-
-
-
-| Repository | Description |
-|------------|-------------|
 | [`engineering-research-wiki`](https://github.com/georgiosgiannakopoulos/engineering-research-wiki) | Technical deep-dives into RF, signal processing, and many more... |
 | [`technical-wiki-hub`](https://github.com/georgiosgiannakopoulos/technical-wiki-hub) | Technical deep-dives into wiki-page-template, linux-and-tools, networking-basics and many more...|
+| [`research library engine`](https://github.com/georgiosgiannakopoulos/research-library-engine) | Technical deep-dives into Research tools, with exporting BibTeX / RIS / IEEE / Markdown / CSV |
 
 More domain-specific wikis will be listed here as they are added.
 ---
