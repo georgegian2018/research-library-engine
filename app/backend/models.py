@@ -1,3 +1,26 @@
+
+from datetime import datetime
+from typing import Optional, List
+from sqlmodel import SQLModel, Field, Relationship
+
+
+class PaperProject(SQLModel, table=True):
+    paper_id: str = Field(foreign_key="paper.id", primary_key=True)
+    project_id: int = Field(foreign_key="project.id", primary_key=True)
+
+
+class Project(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str = Field(index=True, unique=True)
+    description: str = Field(default="")
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+    papers: List["Paper"] = Relationship(
+        back_populates="projects",
+        link_model=PaperProject
+    )
+
+
 from typing import List, Optional
 from datetime import datetime
 from sqlmodel import SQLModel, Field, Relationship
