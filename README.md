@@ -65,3 +65,39 @@ research-library-engine/
 ├─ pyproject.toml
 └─ .gitignore
 
+```
+
+
+
+## Repository Layout
+
+```text
+research-library-engine/
+├─ app/
+│  ├─ backend/
+│  │  ├─ main.py
+│  │  ├─ db.py
+│  │  ├─ models.py
+│  │  ├─ fts.py
+│  │  ├─ ingest.py
+│  │  └─ search.py
+│  └─ frontend/           # (future – web UI)
+│
+├─ cli/
+│  └─ rle.py
+│
+├─ data/                  # SQLite database (generated)
+├─ library/               # PDFs (untouched)
+├─ imports/
+├─ exports/
+├─ docs/
+│  └─ architecture.md
+│
+├─ README.md
+├─ LICENSE.md
+└─ pyproject.toml
+
+
+
+
+
