@@ -1,3 +1,13 @@
+from app.backend.export.bibtex import export_bibtex
+
+@app.command()
+def export_bibtex_cmd():
+    """Export all papers as BibTeX."""
+    print(export_bibtex())
+
+
+
+
 from app.backend.tags_notes import (
     add_tag_to_paper,
     list_tags_for_paper,
