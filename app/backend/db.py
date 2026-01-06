@@ -1,30 +1,54 @@
 from __future__ import annotations
 
-import os
+from contextlib import contextmanager
 from pathlib import Path
+from typing import Iterator
+
 from sqlmodel import SQLModel, Session, create_engine
 
-DEFAULT_DB_PATH = Path("data") / "db.sqlite"
+
+# -------------------------------------------------------------------
+# Database location (local-first)
+# -------------------------------------------------------------------
+
+BASE_DIR = Path(__file__).resolve().parents[2]
+DATA_DIR = BASE_DIR / "data"
+DATA_DIR.mkdir(exist_ok=True)
+
+DB_PATH = DATA_DIR / "db.sqlite"
+DATABASE_URL = f"sqlite:///{DB_PATH}"
 
 
-def get_db_path() -> Path:
-    db_path = Path(os.environ.get("RLE_DB_PATH", str(DEFAULT_DB_PATH)))
-    db_path.parent.mkdir(parents=True, exist_ok=True)
-    return db_path
+# -------------------------------------------------------------------
+# Engine
+# -------------------------------------------------------------------
+
+engine = create_engine(
+    DATABASE_URL,
+    echo=False,
+    connect_args={"check_same_thread": False},
+)
 
 
-def get_engine():
-    db_path = get_db_path()
-    # check_same_thread=False allows FastAPI to use SQLite safely with threadpool
-    return create_engine(f"sqlite:///{db_path}", connect_args={"check_same_thread": False})
+# -------------------------------------------------------------------
+# Session management
+# -------------------------------------------------------------------
+
+@contextmanager
+def get_session() -> Iterator[Session]:
+    """
+    Provide a transactional scope around a series of operations.
+    """
+    with Session(engine) as session:
+        yield session
 
 
-ENGINE = get_engine()
+# -------------------------------------------------------------------
+# Initialization
+# -------------------------------------------------------------------
 
-
-def create_tables():
-    SQLModel.metadata.create_all(ENGINE)
-
-
-def get_session() -> Session:
-    return Session(ENGINE)
+def init_db() -> None:
+    """
+    Create database tables.
+    """
+    SQLModel.metadata.create_all(engine)
