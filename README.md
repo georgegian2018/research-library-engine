@@ -48,6 +48,17 @@ PDF files are **never modified** (“untouched PDFs”); the engine stores metad
 
 ---
 
+## Usage examples
+
+```bash
+rle tag <PAPER_ID> mimo
+rle tags <PAPER_ID>
+rle note <PAPER_ID> notes.md
+rle view-note <PAPER_ID>
+```
+
+---
+
 ## Setup
 
 ```bash
