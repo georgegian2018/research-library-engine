@@ -137,4 +137,24 @@ research-library-engine/
 
 ```
 
+## 🔗 Reference Collections
+
+See [`/links`](./links) for:
+
+- 🧪 **Research tools and academic repositories**
+- 📚 **IEEE / ITU / ETSI standard documents**
+- 🔗 **Long-term reference materials**
+
+---
+
+## 📜 License
+
+This project is licensed under the [MIT License](./LICENSE).
+
+---
+
+## 🙌 Acknowledgments
+
+Built and maintained by [Georgios Giannakopoulos](https://github.com/georgiosgiannakopoulos).  
+Inspired by open knowledge engineering and long-term documentation practices.
 
