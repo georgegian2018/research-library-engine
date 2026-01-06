@@ -1,1 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Research Library Engine</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="title">
+      <h1>Research Library Engine</h1>
+      <p class="subtitle">Local-first • Table-driven • Metadata-centric</p>
+    </div>
+
+    <nav class="tabs">
+      <button class="tab active" data-view="papers">Papers</button>
+      <button class="tab" data-view="projects">Projects</button>
+      <button class="tab" data-view="dedup">Dedup</button>
+    </nav>
+  </header>
+
+  <main class="main">
+    <!-- PAPERS -->
+    <section id="view-papers" class="view">
+      <div class="toolbar">
+        <input id="searchInput" class="input" placeholder='Search (e.g. "MIMO phased array")' />
+        <button id="searchBtn" class="btn">Search</button>
+        <button id="reloadPapersBtn" class="btn secondary">Reload</button>
+      </div>
+
+      <div class="panel">
+        <h2>Papers</h2>
+        <div class="hint">Tip: click a paper row to open details (tags + note).</div>
+        <div id="papersStatus" class="status"></div>
+        <div class="table-wrap">
+          <table class="table" id="papersTable">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Venue</th>
+                <th>DOI</th>
+                <th>Paper ID</th>
+              </tr>
+            </thead>
+            <tbody id="papersTbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Selected Paper</h2>
+        <div id="selectedPaperBox" class="card muted">No paper selected.</div>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Tags</h3>
+            <div class="row">
+              <input id="tagInput" class="input" placeholder="Add tag (e.g. ieee, mimo)" />
+              <button id="addTagBtn" class="btn">Add</button>
+            </div>
+            <div id="tagsList" class="pillbox"></div>
+          </div>
+
+          <div class="card">
+            <h3>Note (Markdown)</h3>
+            <textarea id="noteArea" class="textarea" placeholder="Write your markdown note here..."></textarea>
+            <div class="row">
+              <button id="loadNoteBtn" class="btn secondary">Load</button>
+              <button id="saveNoteBtn" class="btn">Save</button>
+            </div>
+            <div id="noteStatus" class="status"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="view-projects" class="view hidden">
+      <div class="panel">
+        <h2>Projects</h2>
+        <div class="row">
+          <input id="projectName" class="input" placeholder='Project name (e.g. "PhD Thesis")' />
+          <input id="projectDesc" class="input" placeholder="Description (optional)" />
+          <button id="createProjectBtn" class="btn">Create</button>
+          <button id="reloadProjectsBtn" class="btn secondary">Reload</button>
+        </div>
+        <div id="projectsStatus" class="status"></div>
+
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Project ID</th>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="projectsTbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Project Papers</h2>
+        <div class="row">
+          <input id="projectIdForPapers" class="input" placeholder="Project ID" />
+          <button id="loadProjectPapersBtn" class="btn">Load papers</button>
+        </div>
+        <div id="projectPapersStatus" class="status"></div>
+        <ul id="projectPapersList" class="list"></ul>
+      </div>
+    </section>
+
+    <!-- DEDUP -->
+    <section id="view-dedup" class="view hidden">
+      <div class="panel">
+        <h2>Dedup Report</h2>
+        <div class="row">
+          <input id="dedupThreshold" class="input" placeholder="Threshold (default 0.85)" />
+          <button id="runDedupBtn" class="btn">Run</button>
+        </div>
+        <div id="dedupStatus" class="status"></div>
+
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Score</th>
+                <th>Paper 1</th>
+                <th>Paper 2</th>
+              </tr>
+            </thead>
+            <tbody id="dedupTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
 
