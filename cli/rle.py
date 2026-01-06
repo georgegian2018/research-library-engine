@@ -1,3 +1,41 @@
+from app.backend.tags_notes import (
+    add_tag_to_paper,
+    list_tags_for_paper,
+    set_note_for_paper,
+    get_note_for_paper,
+)
+
+@app.command()
+def tag(paper_id: str, tag: str):
+    """Add a tag to a paper."""
+    add_tag_to_paper(paper_id, tag)
+    print(f"[green]Added tag '{tag}' to paper {paper_id}[/green]")
+
+
+@app.command()
+def tags(paper_id: str):
+    """List tags for a paper."""
+    tags = list_tags_for_paper(paper_id)
+    for t in tags:
+        print(f"- {t}")
+
+
+@app.command()
+def note(paper_id: str, file: str):
+    """Set a Markdown note for a paper from a file."""
+    md = Path(file).read_text(encoding="utf-8")
+    set_note_for_paper(paper_id, md)
+    print("[green]Note saved.[/green]")
+
+
+@app.command()
+def view_note(paper_id: str):
+    """View a paper's note."""
+    print(get_note_for_paper(paper_id))
+
+from pathlib import Path
+
+
 from __future__ import annotations
 
 from pathlib import Path
