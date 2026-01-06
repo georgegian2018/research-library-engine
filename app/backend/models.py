@@ -76,6 +76,11 @@ class Paper(SQLModel, table=True):
     authors: List["Author"] = Relationship(back_populates="papers", link_model=PaperAuthor)
     files: List["File"] = Relationship(back_populates="paper")
 
+    projects: List["Project"] = Relationship(
+    back_populates="papers",
+    link_model=PaperProject
+    )
+
     __table_args__ = (
         UniqueConstraint("doi", name="uq_paper_doi"),
     )
