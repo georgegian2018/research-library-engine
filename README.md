@@ -31,7 +31,7 @@ python -m venv .venv
 source .venv/bin/activate
 
 pip install -e .
-
+```
 ---
 
 ## Core Stack (MVP)
@@ -46,38 +46,48 @@ pip install -e .
 
 ---
 
-
-
-
-
-## Repository Layout
-
-```text
-research-library-engine/
-├─ app/
-│  ├─ backend/
-│  │  ├─ main.py
-│  │  ├─ db.py
-│  │  ├─ models.py
-│  │  ├─ fts.py
-│  │  ├─ ingest.py
-│  │  └─ search.py
-│  └─ frontend/           # (future – web UI)
-│
-├─ cli/
-│  └─ rle.py
-│
-├─ data/                  # SQLite database (generated)
-├─ library/               # PDFs (untouched)
-├─ imports/
-├─ exports/
-├─ docs/
-│  └─ architecture.md
-│
-├─ README.md
-├─ LICENSE.md
-└─ pyproject.toml
+## Initialize DB
+```bash
+rle init
 ```
+
+## Ingest PDFs
+```bash
+rle ingest ./library
+# or a single file
+rle ingest ./library/some_paper.pdf
+```
+
+## Search
+```bash
+rle search "MIMO phased array"
+```
+
+## Run server
+```bash
+rle serve
+# then open http://127.0.0.1:8000/docs
+
+```
+
+```yaml
+---
+
+## 6) Run it (commands)
+
+From the repo root:
+
+
+python -m venv .venv
+source .venv/bin/activate   # (Windows: .venv\Scripts\activate)
+pip install -e .
+
+rle init
+rle ingest ./library
+rle search "antenna"
+rle serve
+```
+
 
 
 ## Repository Layout
@@ -122,3 +132,31 @@ research-library-engine/
 
 ```
 
+## Repository Layout
+
+```text
+research-library-engine/
+├─ app/
+│  ├─ backend/
+│  │  ├─ main.py
+│  │  ├─ db.py
+│  │  ├─ models.py
+│  │  ├─ fts.py
+│  │  ├─ ingest.py
+│  │  └─ search.py
+│  └─ frontend/           # (future – web UI)
+│
+├─ cli/
+│  └─ rle.py
+│
+├─ data/                  # SQLite database (generated)
+├─ library/               # PDFs (untouched)
+├─ imports/
+├─ exports/
+├─ docs/
+│  └─ architecture.md
+│
+├─ README.md
+├─ LICENSE.md
+└─ pyproject.toml
+```
