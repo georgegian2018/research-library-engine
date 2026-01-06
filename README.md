@@ -11,6 +11,27 @@ RLE is a Calibre-inspired, research-first system focused on:
 
 PDF files are **never modified** (“untouched PDFs”); the engine stores metadata + file paths + hashes.
 
+
+
+# Research Library Engine (RLE)
+
+Local-first research library engine for desktop/laptop use.
+
+## Features (MVP)
+- PDF ingest (hash-based identity)
+- DOI detection (basic regex)
+- SQLite database + FTS5 full-text search
+- FastAPI local server
+- CLI tooling
+
+## Setup
+```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+source .venv/bin/activate
+
+pip install -e .
+
 ---
 
 ## Core Stack (MVP)
@@ -96,7 +117,7 @@ research-library-engine/
 ├─ README.md
 ├─ LICENSE.md
 └─ pyproject.toml
-
+```
 
 
 
