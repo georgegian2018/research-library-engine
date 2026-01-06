@@ -12,11 +12,6 @@ RLE is a Calibre-inspired, research-first system focused on:
 PDF files are **never modified** (“untouched PDFs”); the engine stores metadata + file paths + hashes.
 
 
-
-# Research Library Engine (RLE)
-
-Local-first research library engine for desktop/laptop use.
-
 ## Features (MVP)
 - PDF ingest (hash-based identity)
 - DOI detection (basic regex)
@@ -70,7 +65,7 @@ rle serve
 
 ```
 
-```yaml
+```bash
 ---
 
 ## 6) Run it (commands)
