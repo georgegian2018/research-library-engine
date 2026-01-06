@@ -31,9 +31,37 @@ PDF files are **never modified** (“untouched PDFs”); the engine stores metad
 research-library-engine/
 ├─ app/
 │  ├─ backend/
+│  │  ├─ __init__.py
+│  │  ├─ main.py          # FastAPI app
+│  │  ├─ db.py            # SQLite engine + sessions
+│  │  ├─ models.py        # SQLModel ORM
+│  │  ├─ fts.py           # FTS5 setup & rebuild
+│  │  ├─ ingest.py        # PDF ingest + hashing + DOI detection
+│  │  └─ search.py        # Search services
+│  └─ frontend/           # (future – web UI)
+│
 ├─ cli/
-├─ data/       # SQLite database lives here (default)
-├─ library/    # Your PDFs (optional; can point to any folder)
+│  ├─ __init__.py
+│  └─ rle.py              # CLI entry point
+│
+├─ data/
+│  ├─ db.sqlite           # SQLite DB (generated)
+│  └─ .gitkeep
+│
+├─ library/
+│  └─ .gitkeep            # Your PDFs live here (optional)
+│
 ├─ imports/
+│  └─ .gitkeep
+│
 ├─ exports/
-└─ README.md
+│  └─ .gitkeep
+│
+├─ docs/
+│  └─ architecture.md     # (optional, future)
+│
+├─ README.md
+├─ LICENSE.md
+├─ pyproject.toml
+└─ .gitignore
+
