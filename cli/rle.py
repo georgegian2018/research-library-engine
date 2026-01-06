@@ -1,3 +1,11 @@
+from app.backend.projects import (
+    create_project,
+    list_projects,
+    add_paper_to_project,
+    list_papers_in_project,
+)
+
+
 from app.backend.export.bibtex import export_bibtex
 
 @app.command()
@@ -132,3 +140,33 @@ def serve(host: str = "127.0.0.1", port: int = 8000):
 
 if __name__ == "__main__":
     app()
+
+
+@app.command()
+def project_create(name: str, description: str = ""):
+    """Create a new research project."""
+    project = create_project(name, description)
+    print(f"[green]Created project {project.id}: {project.name}[/green]")
+
+
+@app.command()
+def project_list():
+    """List all projects."""
+    projects = list_projects()
+    for p in projects:
+        print(f"{p.id}: {p.name}")
+
+
+@app.command()
+def project_add_paper(project_id: int, paper_id: str):
+    """Add a paper to a project."""
+    add_paper_to_project(project_id, paper_id)
+    print("[green]Paper added to project.[/green]")
+
+
+@app.command()
+def project_papers(project_id: int):
+    """List papers in a project."""
+    papers = list_papers_in_project(project_id)
+    for p in papers:
+        print(f"- {p.title}")
