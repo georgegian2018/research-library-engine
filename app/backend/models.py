@@ -1,3 +1,28 @@
+from typing import List, Optional
+from datetime import datetime
+from sqlmodel import SQLModel, Field, Relationship
+
+
+class PaperTag(SQLModel, table=True):
+    paper_id: str = Field(foreign_key="paper.id", primary_key=True)
+    tag_id: int = Field(foreign_key="tag.id", primary_key=True)
+
+
+class Tag(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: str = Field(index=True, unique=True)
+
+    papers: List["Paper"] = Relationship(back_populates="tags", link_model=PaperTag)
+
+
+class Note(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    paper_id: str = Field(foreign_key="paper.id", index=True)
+    content_md: str = Field(default="")
+    updated_at: datetime = Field(default_factory=datetime.utcnow, index=True)
+
+
+
 from __future__ import annotations
 
 from datetime import datetime
