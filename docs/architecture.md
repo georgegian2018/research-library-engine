@@ -45,24 +45,24 @@ It is a **research infrastructure layer**.
 
 ```text
 ┌──────────────────────────────┐
-│ Frontend UI │
-│ (HTML + CSS + JS, tables) │
+│ Frontend UI                  │
+│ (HTML + CSS + JS, tables)    │
 └──────────────┬───────────────┘
 │ HTTP (JSON)
 ┌──────────────▼───────────────┐
-│ FastAPI API │
-│ app/backend/main.py │
+│ FastAPI API                  │
+│ app/backend/main.py          │
 └──────────────┬───────────────┘
 │
 ┌──────────────▼───────────────┐
-│ Backend Services │
-│ ingest / search / dedup / │
-│ export / projects / tags │
+│ Backend Services             │
+│ ingest / search / dedup /    │
+│ export / projects / tags     │
 └──────────────┬───────────────┘
 │
 ┌──────────────▼───────────────┐
-│ SQLite Database │
-│ data/db.sqlite + FTS5 │
+│ SQLite Database              │
+│ data/db.sqlite + FTS5        │
 └──────────────────────────────┘
 
 ```
