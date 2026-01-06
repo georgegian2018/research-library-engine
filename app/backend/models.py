@@ -22,6 +22,9 @@ class Note(SQLModel, table=True):
     updated_at: datetime = Field(default_factory=datetime.utcnow, index=True)
 
 
+tags: List["Tag"] = Relationship(back_populates="papers", link_model=PaperTag)
+notes: List["Note"] = Relationship(back_populates=None)
+
 
 from __future__ import annotations
 
