@@ -1,3 +1,4 @@
+print(">>> LOADING models.py (Paper-only version)")
 
 from datetime import datetime
 from typing import Optional
