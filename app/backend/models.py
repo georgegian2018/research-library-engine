@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import List, Optional
+from typing import Optional
+from uuid import uuid4
 
-from sqlmodel import SQLModel, Field, Relationship
+from sqlmodel import SQLModel, Field
 
 
 # -------------------------------------------------------------------
@@ -11,13 +12,18 @@ from sqlmodel import SQLModel, Field, Relationship
 # -------------------------------------------------------------------
 
 class Paper(SQLModel, table=True):
-    id: str = Field(primary_key=True, index=True)
+    """
+    Canonical paper record.
+    """
+
+    id: str = Field(default_factory=lambda: str(uuid4()), primary_key=True)
+
     title: str
-    abstract: Optional[str] = None
+    abstract: str = ""
     year: Optional[int] = None
-    venue: Optional[str] = None
-    doi: Optional[str] = Field(default=None, index=True)
-    arxiv_id: Optional[str] = Field(default=None, index=True)
+    venue: str = ""
+    doi: Optional[str] = None
+    arxiv_id: Optional[str] = None
 
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
