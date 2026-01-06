@@ -1,3 +1,11 @@
+from app.backend.tags_notes import (
+    add_tag_to_paper,
+    list_tags_for_paper,
+    set_note_for_paper,
+    get_note_for_paper,
+)
+
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -10,6 +18,7 @@ from app.backend.db import create_tables
 from app.backend.fts import ensure_fts, rebuild_fts
 from app.backend.ingest import ingest_pdf
 from app.backend.search import fts_search, list_papers
+
 
 app = FastAPI(title="Research Library Engine", version="0.1.0")
 
@@ -58,3 +67,28 @@ async def ingest_upload(file: UploadFile = UploadFileType(...)):
 
     result = ingest_pdf(temp_path)
     return result
+
+
+
+
+@app.post("/papers/{paper_id}/tags")
+def api_add_tag(paper_id: str, tag: str):
+    add_tag_to_paper(paper_id, tag)
+    return {"status": "ok", "paper_id": paper_id, "tag": tag}
+
+
+@app.get("/papers/{paper_id}/tags")
+def api_list_tags(paper_id: str):
+    return list_tags_for_paper(paper_id)
+
+
+@app.post("/papers/{paper_id}/note")
+def api_set_note(paper_id: str, content_md: str):
+    set_note_for_paper(paper_id, content_md)
+    return {"status": "ok"}
+
+
+@app.get("/papers/{paper_id}/note")
+def api_get_note(paper_id: str):
+    return {"content_md": get_note_for_paper(paper_id)}
+
