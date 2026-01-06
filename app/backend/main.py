@@ -1,3 +1,10 @@
+from app.backend.dedup import find_possible_duplicates
+
+@app.get("/dedup/report")
+def api_dedup_report(threshold: float = 0.85):
+    return find_possible_duplicates(threshold)
+
+
 from app.backend.projects import (
     create_project,
     list_projects,
