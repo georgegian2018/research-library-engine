@@ -1,0 +1,24 @@
+[project]
+name = "research-library-engine"
+version = "0.1.0"
+description = "Local-first Research Library Engine (FastAPI + SQLite FTS5 + CLI)"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.27",
+  "sqlmodel>=0.0.22",
+  "typer>=0.12",
+  "rich>=13.7",
+  "pydantic>=2.6",
+  "python-multipart>=0.0.9",
+  "PyMuPDF>=1.24.0"
+]
+
+[project.scripts]
+rle = "cli.rle:app"
+
+[tool.ruff]
+line-length = 100
+
+[tool.pyright]
+typeCheckingMode = "basic"
