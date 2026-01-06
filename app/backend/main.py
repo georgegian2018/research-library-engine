@@ -1,0 +1,60 @@
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Optional
+
+from fastapi import FastAPI, UploadFile, File as UploadFileType, Query
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.backend.db import create_tables
+from app.backend.fts import ensure_fts, rebuild_fts
+from app.backend.ingest import ingest_pdf
+from app.backend.search import fts_search, list_papers
+
+app = FastAPI(title="Research Library Engine", version="0.1.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # local-first MVP; tighten later
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.on_event("startup")
+def _startup():
+    create_tables()
+    ensure_fts()
+    rebuild_fts()
+
+
+@app.get("/health")
+def health():
+    return {"ok": True}
+
+
+@app.get("/papers")
+def papers(limit: int = 100, offset: int = 0, year: Optional[int] = None):
+    return list_papers(limit=limit, offset=offset, year=year)
+
+
+@app.get("/search")
+def search(q: str = Query(min_length=1), limit: int = 50):
+    return fts_search(query=q, limit=limit)
+
+
+@app.post("/ingest")
+async def ingest_upload(file: UploadFile = UploadFileType(...)):
+    if not file.filename.lower().endswith(".pdf"):
+        return {"status": "error", "reason": "only_pdf_supported_mvp"}
+
+    temp_dir = Path("imports") / "uploads"
+    temp_dir.mkdir(parents=True, exist_ok=True)
+    temp_path = temp_dir / file.filename
+
+    content = await file.read()
+    temp_path.write_bytes(content)
+
+    result = ingest_pdf(temp_path)
+    return result
